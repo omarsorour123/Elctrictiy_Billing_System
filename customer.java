@@ -1,4 +1,4 @@
-
+package com.mycompany.elctricitybillingsystem;
 import java.sql.Date;
 
 /*
@@ -10,8 +10,8 @@ import java.sql.Date;
  *
  * @author Admin
  */
-public class customer {
-  private  String meterCode;
+public class Customer {
+  private  int meterCode;
    private String F_name;
    private String L_name;
    private int Region;
@@ -21,9 +21,13 @@ public class customer {
    private int tariff;
     private int  consumption;
   private  String SSN;
-      java.sql.Date  payingDate;
+     java.sql.Date  payingDate;
+     public Customer() {
+    
+}
 
-    public customer(String meterCode, String F_name, String L_name, int Region, String Email, String Password, String phoneNumber, int tariff, int consumption, String SSN, Date payingDate) {
+   
+    public Customer(int meterCode, String F_name, String L_name, int Region, String Email, String Password, String phoneNumber, int tariff, int consumption, String SSN, Date payingDate) {
         this.meterCode = meterCode;
         this.F_name = F_name;
         this.L_name = L_name;
@@ -37,7 +41,7 @@ public class customer {
         this.payingDate = payingDate;
     }
 
-    public void setMeterCode(String meterCode) {
+    public void setMeterCode(int meterCode) {
         this.meterCode = meterCode;
     }
 
@@ -81,7 +85,7 @@ public class customer {
         this.payingDate = payingDate;
     }
 
-    public String getMeterCode() {
+    public int getMeterCode() {
         return meterCode;
     }
 
@@ -124,9 +128,28 @@ public class customer {
     public Date getPayingDate() {
         return payingDate;
     }
+    public void copyData (Customer temp )
+    {
+        this.meterCode = temp.meterCode;
+        this.F_name = temp.F_name;
+        this.L_name = temp.L_name;
+        this.Region = temp.Region;
+        this.Email = temp.Email;
+        this.Password = temp.Password;
+        this.phoneNumber = temp.phoneNumber;
+        this.tariff = temp.tariff;
+        this.consumption = temp.consumption;
+        this.SSN = temp.SSN;
+        this.payingDate = temp.payingDate;
+    }
+     @Override
+    public String toString() {
+        return "Customer{" + "meterCode=" + meterCode + ", F_name=" + F_name + ", L_name=" + L_name + ", Region=" + Region + ", Email=" + Email + ", Password=" + Password + ", phoneNumber=" + phoneNumber + ", tariff=" + tariff + ", consumption=" + consumption + ", SSN=" + SSN + ", payingDate=" + payingDate + '}';
+    }
               
               
               
+    
     
     
     
