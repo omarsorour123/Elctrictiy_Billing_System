@@ -104,7 +104,7 @@ public class thesignin extends javax.swing.JFrame {
 
         jLabel6.setText("Logging in as:");
 
-        userType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Customer", "Operator", "Admin", " " }));
+        userType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Customer", "Operator", "Admin"}));
         userType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userTypeActionPerformed(evt);
@@ -249,7 +249,7 @@ public class thesignin extends javax.swing.JFrame {
     }//GEN-LAST:event_userTypeActionPerformed
 
     private void cancel_bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_bActionPerformed
-        int a= JOptionPane.showConfirmDialog(null, "Do you sure you want to Exit ? ","Select",JOptionPane.YES_NO_OPTION);
+        int a= JOptionPane.showConfirmDialog(null, "Are you sure you want to Exit ? ","Select",JOptionPane.YES_NO_OPTION);
         if(a==0)
         {
         System.exit(0);
