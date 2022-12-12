@@ -1,17 +1,17 @@
-package com.mycompany.elctricitybillingsystem;
-import java.sql.Date;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+package javaapplication1;
+
+import java.util.Date;
 
 /**
  *
- * @author Admin
+ * @author omar
  */
-public class Customer {
-  private  int meterCode;
+public class customer {
+    private int meterCode;
    private String F_name;
    private String L_name;
    private int Region;
@@ -21,13 +21,9 @@ public class Customer {
    private int tariff;
     private int  consumption;
   private  String SSN;
-     java.sql.Date  payingDate;
-     public Customer() {
-    
-}
+    java.sql.Date  payingDate;
 
-   
-    public Customer(int meterCode, String F_name, String L_name, int Region, String Email, String Password, String phoneNumber, int tariff, int consumption, String SSN, Date payingDate) {
+    public customer(int meterCode, String F_name, String L_name, int Region, String Email, String Password, String phoneNumber, int tariff, int consumption, String SSN, Date payingDate) {
         this.meterCode = meterCode;
         this.F_name = F_name;
         this.L_name = L_name;
@@ -38,7 +34,17 @@ public class Customer {
         this.tariff = tariff;
         this.consumption = consumption;
         this.SSN = SSN;
-        this.payingDate = payingDate;
+        this.payingDate = (java.sql.Date) payingDate;
+    }
+    public customer(int meterCode, String F_name, String L_name, int tariff) {
+        this.meterCode = meterCode;
+        this.F_name = F_name;
+        this.L_name = L_name;
+        this.tariff = tariff;
+    }
+
+    customer() {
+       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public void setMeterCode(int meterCode) {
@@ -82,7 +88,7 @@ public class Customer {
     }
 
     public void setPayingDate(Date payingDate) {
-        this.payingDate = payingDate;
+        this.payingDate = (java.sql.Date) payingDate;
     }
 
     public int getMeterCode() {
@@ -128,72 +134,4 @@ public class Customer {
     public Date getPayingDate() {
         return payingDate;
     }
-    public void copyData (Customer temp )
-    {
-        this.meterCode = temp.meterCode;
-        this.F_name = temp.F_name;
-        this.L_name = temp.L_name;
-        this.Region = temp.Region;
-        this.Email = temp.Email;
-        this.Password = temp.Password;
-        this.phoneNumber = temp.phoneNumber;
-        this.tariff = temp.tariff;
-        this.consumption = temp.consumption;
-        this.SSN = temp.SSN;
-        this.payingDate = temp.payingDate;
-    }
-     @Override
-    public String toString() {
-        return "Customer{" + "meterCode=" + meterCode + ", F_name=" + F_name + ", L_name=" + L_name + ", Region=" + Region + ", Email=" + Email + ", Password=" + Password + ", phoneNumber=" + phoneNumber + ", tariff=" + tariff + ", consumption=" + consumption + ", SSN=" + SSN + ", payingDate=" + payingDate + '}';
-    }
-              
-              
-              
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
