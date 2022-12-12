@@ -1,0 +1,15 @@
+/////////////////////////////////////////////
+  //first query to execute   
+query="create table customer_info(metercode int not null AUTO_INCREMENT,fname varchar(30) not null,lname varchar(30) not null,Region int not null,constraint pk1 primary key (metercode))";
+   //second query
+       query="Alter table customer_info AUTO_INCREMENT = 2022000;";
+       //third query
+query="create table customer_contact(email varchar(30) not null,password varchar(30) not null,phonenumber varchar(30) not null, Metercode int not null,constraint pk2 primary key (email),CONSTRAINT f2 FOREIGN KEY (Metercode) REFERENCES customer_info (metercode) ON DELETE CASCADE)";
+//fourth query
+   query="create table bill_info(ssn varchar(30) not null,triff int not null,consumption int not null,payingdate Date not null, metercode3 int not null,constraint pk3 primary key (ssn),CONSTRAINT f3 FOREIGN KEY (metercode3) REFERENCES customer_info (metercode) ON DELETE CASCADE)";
+  //fifth query
+query="create table operator_info(id int not null AUTO_INCREMENT,fname varchar(30) not null,lname varchar(30) not null,ssn int not null,email varchar(30) not null,password varchar(30) not null,constraint pk1 primary key (id))";
+//six query
+query="create table operator_payment(ID int not null,collected_payment int ,CONSTRAINT f7 FOREIGN KEY (ID) REFERENCES operator_info (id) ON DELETE CASCADE)";
+ss.execute(query);
+//////////////////////////////////////////////////////
