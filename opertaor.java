@@ -6,17 +6,9 @@ package javaapplication1;
 import java.sql.Statement;
 import java.util.*;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import static javaapplication1.JavaApplication1.c;
-import static javaapplication1.JavaApplication1.query;
-import static javaapplication1.JavaApplication1.r;
-import static javaapplication1.JavaApplication1.ss;
 import java.sql.PreparedStatement;
-import static javaapplication1.JavaApplication1.query6;
-import static javaapplication1.JavaApplication1.r;
-import static javaapplication1.JavaApplication1.ss;
 /**
  *
  * @author omar
@@ -198,7 +190,7 @@ public class opertaor {
        }
        /////////////////////////////////////////////////////////////
        //view all bills of region
-       public void viewBillsOfRegion() throws SQLException{
+       public ArrayList<customer> viewBillsOfRegion() throws SQLException{
             sql c1=new sql();
             c=c1.connect();
             ss=c.createStatement();
@@ -218,7 +210,9 @@ public class opertaor {
               lname=r.getString("lname");
               cost=tariff_print(code);
               list.add(new customer(code,f1name,lname,cost));
+              
          }
+         return list;
        }
 
     public void setId(int id) {
