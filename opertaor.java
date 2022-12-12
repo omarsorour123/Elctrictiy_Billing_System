@@ -38,6 +38,14 @@ public class opertaor {
     static Connection c;
     static ResultSet r;
     static ResultSet l;
+    private int id;
+    private String fname;
+    private String lname;
+    private String ssn;
+    private String email;
+    private String pass;
+    private int total_collected;
+    
     
     //function to calculate traiff
      int tariff() throws SQLException {
@@ -211,6 +219,76 @@ public class opertaor {
               cost=tariff_print(code);
               list.add(new customer(code,f1name,lname,cost));
          }
+       }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
+
+    public void setSsn(String ssn) {
+        this.ssn = ssn;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    public void setTotal_collected(int total_collected) {
+        this.total_collected = total_collected;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getFname() {
+        return fname;
+    }
+
+    public String getLname() {
+        return lname;
+    }
+
+    public String getSsn() {
+        return ssn;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public int getTotal_collected() {
+        return total_collected;
+    }
+       
+       opertaor(){
+           
+       }
+       opertaor(int id,String fname, String lname,String email,String pass,int totalcollected,String ssn){
+           this.id = id;
+           this.fname = fname;
+           this.lname = lname;
+           this.ssn = ssn;
+           this.email = email;
+           this.pass = pass;
+           this.total_collected = total_collected;
+           
        }
 
 }
