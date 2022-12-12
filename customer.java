@@ -46,6 +46,22 @@ public class customer {
     customer() {
        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+     public customer(  String firstName,  String LastName,    String Email ,   String passWord ,  int region  ){
+   
+     this.F_name = firstName;
+     this.L_name = LastName;
+     this.Email = Email;
+     this.Password = passWord;
+     this.Region = region;
+   }
+    
+    
+    
+    
+    
+    
+    
 
     public void setMeterCode(int meterCode) {
         this.meterCode = meterCode;
