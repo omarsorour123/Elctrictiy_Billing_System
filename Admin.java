@@ -56,7 +56,9 @@ public class Admin {
         query = "insert into customer_info "
                 + "(firstname,lastname,ssn,region)"
                 + "values (?,?,?,?)";
-             ss=c.prepareStatement(query);
+          
+        
+        ss=c.prepareStatement(query);
              ss.setString(1, customer.getF_name());
              ss.setString (2,customer.getL_name());
              ss.setString(3, customer.getSSN());
@@ -67,6 +69,7 @@ public class Admin {
             query = " select MAX(meterCode) as max_materCode from customer_info";
             ss=c.prepareStatement(query);
             r=ss.executeQuery();
+              
             r.next();
             m = r.getInt (1);
             
@@ -125,7 +128,7 @@ public class Admin {
     }
     
     
-     public void updateCustomer (int meterCode , String feild,java.sql.Date x)
+     public void updateCustomer (   int meterCode , String feild,java.sql.Date x)
      {
          try {
     String query;

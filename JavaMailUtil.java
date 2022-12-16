@@ -22,6 +22,7 @@ import javax.mail.internet.MimeMessage;
 
 
 public class JavaMailUtil {
+private static String emailMessage;
 public static void sendMail(String recepient) throws Exception
 { System.out.println("prepare to send email");
     Properties properties = new Properties (); 
@@ -50,11 +51,15 @@ Transport.send(message);
         message.setFrom(new InternetAddress (myAccountEmail));
         message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
         message.setSubject("first message");
-        message.setText ("hiiiii ");
+        message.setText (emailMessage);
         return message ;
     } catch (Exception ex) {
         Logger.getLogger(JavaMailUtil.class.getName()).log(Level.SEVERE, null, ex);
     }
     return null;
+    }
+    public static void setEmailMessage (String emailMessage)
+    {
+        JavaMailUtil.emailMessage=emailMessage;
     }
 }

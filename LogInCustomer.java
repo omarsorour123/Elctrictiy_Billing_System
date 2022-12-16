@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+
 package com.mycompany.elctricitybillingsystem;
 
 import java.sql.Connection;
@@ -68,7 +69,7 @@ public class LogInCustomer {
     {  try {
      Customer temp = new Customer ( r.getInt("meterCode"),r.getString("firstname"),r.getString("lastname"),r.getInt("region"),r.getString("email"), r.getString("password"),r.getString("phonenum"),r.getInt("triff"),r.getInt("consumption"),r.getString("ssn"),r.getDate("payingdate"));
      customer.copyData (temp) ;   
-     System.out.println(temp.toString());
+  
                 System.out.println("done");
     }
     catch(SQLException e) {
