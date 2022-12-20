@@ -1,4 +1,6 @@
+package com.mycompany.elctricitybillingsystem;
 
+import com.mycompany.elctricitybillingsystem.*;
 import javax.swing.JOptionPane;
 
 /*
@@ -49,6 +51,7 @@ public class thesignin extends javax.swing.JFrame {
         userType = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
 
         jTextField1.setText("jTextField1");
 
@@ -122,6 +125,7 @@ public class thesignin extends javax.swing.JFrame {
             }
         });
 
+        jCheckBox1.setBackground(new java.awt.Color(0, 51, 51));
         jCheckBox1.setForeground(new java.awt.Color(204, 255, 204));
         jCheckBox1.setText("Show Password");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -154,10 +158,27 @@ public class thesignin extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 64, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 49, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(174, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(273, 273, 273))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -181,26 +202,25 @@ public class thesignin extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jCheckBox1)
                                 .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(211, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(226, 226, 226))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfUser, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfUser, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(tfPassword)
+                        .addGap(7, 7, 7)))
                 .addComponent(jCheckBox1)
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,44 +271,96 @@ public class thesignin extends javax.swing.JFrame {
     
     private void Login_bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login_bActionPerformed
        
-        if( tfUser.getText().equals ("customer") &&          tfPassword.getText().equals ("customer")      ) 
+        
+        
+        String Email=tfUser.getText();
+        String Password=tfPassword.getText();
+         String user =(String) userType.getSelectedItem();
+        
+         int userInt=1;
+         
+         
+           switch(user)  
         {
-              
-              
-//               customer customer1=new customer();
-//             
-//             customer1.setF_name("Amr");
-//                    
-//             customer1.setL_name("Hamed");
+            case "Customer" -> userInt=1;
+            case "Operator" ->userInt=2;
+            case "Admin" -> userInt=3;
+                
              
-//             
+        }
+           if(userInt==1)
+           {
+               
+               
+                Customer customer1= new Customer();
+            LogInCustomer log=new LogInCustomer();
+            if(log.validateAccount(Email,Password, customer1)){
+                this.setVisible(false);
+                new oldCustomerHome(customer1).setVisible(true);
+               
+            }
+            else {
+            
+            JOptionPane.showMessageDialog(null, "Invalid Inputs !");
+            }
+               
+               
+           
+            
+           
+           }
+           
+           if(userInt==2)
+           {
+           
+           
+           Opertaor op1=new Opertaor();
+           LogInOperator log=new LogInOperator();
+               
+           if(log.validateAccount(Email, Password, op1))
+           {
+               this.setVisible(false);
+               new operatorHome(op1).setVisible(true);
+               
+           }
+           }
+           
+           if(userInt==3)
+           {
+           if(Email.equals("Admin")&&Password.equals("Admin_123"))
+           {
+                new adminHome().setVisible(true);
+           }
+           
+           }
+           
+           
            
         
-             this.setVisible(false);
-         new oldCustomerHome().setVisible(true);
-        }
+           
         
         
-          if( tfUser.getText().equals ("admin") &&          tfPassword.getText().equals ("admin")      ) 
-        {
-               setVisible(false);
-              new  adminHome().setVisible(true);
-        
-        
-        }
-          
-             if( tfUser.getText().equals ("operator") &&          tfPassword.getText().equals ("operator")      ) 
-        {
-               setVisible(false);
-              new  operatorHome().setVisible(true);
-        
-        
-        }
+//        
+//          if( tfUser.getText().equals ("admin") &&          tfPassword.getText().equals ("admin")      ) 
+//        {
+//               setVisible(false);
+//              new  adminHome().setVisible(true);
+//        
+//        
+//        
+//          
+//             if( tfUser.getText().equals ("operator") &&          tfPassword.getText().equals ("operator")      ) 
+//        {
+//               setVisible(false);
+//              new  operatorHome().setVisible(true);
+//        
+//        
+//        }
+//             
              
-             
-              String a  = tfUser.getText();
-              String b  = tfPassword.getText();
-              String user =(String) userType.getSelectedItem();
+//              String a  = tfUser.getText();
+//              String b  = tfPassword.getText();
+            
               
             
              
@@ -393,6 +465,7 @@ public class thesignin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JPasswordField tfPassword;

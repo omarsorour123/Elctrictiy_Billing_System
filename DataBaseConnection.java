@@ -10,11 +10,14 @@ import java.sql.DriverManager;
 
 // (this class to connect to database)
 public class DataBaseConnection {
-     private final String user="root";
+    // (info of database to connect)
+    private final String user="root";
      private final String password ="";
+     
      private final String add="jdbc:mysql://localhost:3306/electricitybillingsystem"; 
      private  Connection c;
-             public Connection connect ()
+     //function that return the connetion to use database anywhere        
+     public Connection connect ()
              {
                   try {  Class.forName("com.mysql.cj.jdbc.Driver");
 

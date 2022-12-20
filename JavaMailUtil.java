@@ -23,6 +23,7 @@ import javax.mail.internet.MimeMessage;
 
 public class JavaMailUtil {
 private static String emailMessage;
+private static String emailSub;
 public static void sendMail(String recepient) throws Exception
 { System.out.println("prepare to send email");
     Properties properties = new Properties (); 
@@ -31,8 +32,8 @@ public static void sendMail(String recepient) throws Exception
     properties.put("mail.smtp.host","smtp.gmail.com");
     properties.put("mail.smtp.port","587");
     
-    String myAccountEmail = "customerproject12@gmail.com";
-    String password = "iyiepqpjidqmeodt";    
+    String myAccountEmail = "electricalbillingsystem@gmail.com";
+    String password = "wvkfwecfzcrrovcf";    
     
     Session session = Session.getInstance(properties,
           new javax.mail.Authenticator() {
@@ -50,7 +51,7 @@ Transport.send(message);
         Message message = new MimeMessage  (session);
         message.setFrom(new InternetAddress (myAccountEmail));
         message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
-        message.setSubject("first message");
+        message.setSubject(emailSub);
         message.setText (emailMessage);
         return message ;
     } catch (Exception ex) {
@@ -62,4 +63,8 @@ Transport.send(message);
     {
         JavaMailUtil.emailMessage=emailMessage;
     }
+     public static void setEmailSubject (String emailSub)
+     {
+         JavaMailUtil.emailSub = emailSub;
+     }
 }

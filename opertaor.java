@@ -2,55 +2,61 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package javaapplication1;
+package com.mycompany.elctricitybillingsystem;
+
 import java.sql.Statement;
 import java.util.*;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author omar
  */
-public class opertaor {
+public class Opertaor {
     static Statement ss;
     static String query;//used in traiff and traiff_print
-    static String query2="UPDATE operator_payment SET collected_payment=? WHERE ID=?";//collectedPayment
+    static String query2="UPDATE operator_payment SET collected_payment=? WHERE id=?";//collectedPayment
     static String query3;//used in traiff
-    static String query4="UPDATE bill_info SET triff=? WHERE metercode3=?";//traiff
+    static String query4="UPDATE bill_info SET triff=? WHERE meterCode=?";//traiff
     static String query9;//collected payment
     static String query10;//validate
     static String query11;//print_bill
-    static String query13="UPDATE bill_info SET consumption=? WHERE metercode3=?";//validate
-    static String query14="delete from bill_info where metercode3=?";//cancelsubscribation
-    static String query15="delete from customer_info where metercode=?";//cancelsubscribation
+    static String query13="UPDATE bill_info SET consumption=? WHERE meterCode=?";//validate
+    static String query14="delete from bill_info where meterCode=?";//cancelsubscribation
+    static String query15="delete from customer_info where meterCode=?";//cancelsubscribation
     static String query16="delete from customer_contact where Metercode=?";//cancelsubscribation
     static String query17;//show region bill
     static Connection c;
     static ResultSet r;
     static ResultSet l;
-    private int id;
-    private String fname;
-    private String lname;
     private String ssn;
+    private String fname;
+    private int id;
+    private String lname;
     private String email;
     private String pass;
     private int total_collected;
-    
+
+    public Opertaor() {
+    }
     
     //function to calculate traiff
-     int tariff() throws SQLException {
+    public int tariff(int code) throws SQLException {
          int traiff;
          int firstCard=9,secondCard=13,thirdCard=20;
-         Scanner input=new Scanner(System.in);
-        System.out.println("please enter your meter code");
-        int code = input.nextInt(); 
-         sql c1=new sql();
+         //Scanner input=new Scanner(System.in);
+       // System.out.println("please enter your meter code");
+       
+        DataBaseConnection c1=new DataBaseConnection();
          c=c1.connect();
          ss=c.createStatement();
          //query to get consumption by metercode
-         query="SELECT consumption FROM bill_info WHERE metercode3="+code;
+         query="SELECT consumption FROM bill_info WHERE metercode="+code;
          r=ss.executeQuery(query);
        r.next();
        traiff=r.getInt("consumption");
@@ -63,49 +69,61 @@ public class opertaor {
            traiff=traiff*thirdCard;
        }
        //query3 is to update consumption to 0
-       query3="UPDATE bill_info SET consumption=0 WHERE metercode3= "+code;
+       query3="UPDATE bill_info SET consumption=0 WHERE meterCode= "+code;
        ss.execute(query3);
        //query4 update triff 
        PreparedStatement k =c.prepareStatement(query4);
          k.setInt(1,traiff);
          k.setInt(2,code);
          k.execute();
-       return traiff;
+         
+         return traiff;
     }
 //////////////////////////////////////////////////////////////////////////////////////
-     
+  
+    
+    
+    
+    
+    
+    
      //this function we use only to show traiff in print_bills it doesonot change any thing 
-      int tariff_print(int code) throws SQLException {
-         int traiff, firstCard=9,secondCard=13,thirdCard=20;
-        sql c1=new sql();
+     public int tariff_print(int code)  {
+         int traiff=1, firstCard=9,secondCard=13,thirdCard=20;
+        DataBaseConnection c1=new DataBaseConnection();
         c=c1.connect();
-         ss=c.createStatement();
-         //this query is the same from traiff function
-         query="SELECT consumption FROM bill_info WHERE metercode3="+code;
+        try {
+            ss=c.createStatement();
+            query="SELECT consumption FROM bill_info WHERE metercode="+code;
          l=ss.executeQuery(query);
        l.next();
        traiff=l.getInt("consumption");
-      if(traiff>0&&traiff<50){
+     //    System.out.println(traiff);
+        } catch (SQLException ex) {
+           // System.out.println("shit");
+            System.out.println(ex.getMessage());
+        }
+         //this query is the same from traiff function
+          if(traiff>0&&traiff<50){
            traiff=traiff*firstCard;
        }else if(traiff<=50&&traiff>100){
            traiff=traiff*secondCard;
        }else{
            traiff=traiff*thirdCard;
        }
-     
+      
        return traiff;
     }
 ////////////////////////////////////////////////////////////////////////////////////
      //function collect payment and put it in operator_payment table in database
-     public void collectPayment() throws SQLException{
+     public void collectPayment(int meterCode,int id) throws SQLException{
          int tariff;
          //we use function traiff
-         tariff = tariff();
-         Scanner input=new Scanner(System.in);
-         System.out.println("enter the id:");
-         int id= input.nextInt();//we take id from opertor 
+         tariff = tariff(meterCode);
+         
+       
          //query9 this query we take the collected payment from the operator to add it to the newpayment
-         query9="SELECT collected_payment FROM operator_payment WHERE ID="+id;
+         query9="SELECT collected_payment FROM operator_payment WHERE id="+id;
          r=ss.executeQuery(query9);
          r.next();
          int operatorPayment;
@@ -120,16 +138,16 @@ public class opertaor {
          }
      //////////////////////////////////////////////////////////////////////////////////////
      //this function compare between real consumption and consumption in table
-         public boolean validate_reading() throws SQLException{
-             int consumption=50;
+         public boolean validate_reading(int meter_code,int consumption) throws SQLException{
+            // int consumption=50;
              int real_consumption;
-             int meter_code;
-            Scanner input=new Scanner(System.in);
-            System.out.println("please enter your meter code");
-            meter_code = input.nextInt();
+              
+           // Scanner input=new Scanner(System.in);
+            //System.out.println("please enter your meter code");
+           // meter_code = input.nextInt();
             //this query10 get the consumption from table
-             query10="SELECT consumption FROM bill_info WHERE metercode3="+meter_code;
-             sql c1=new sql();
+             query10="SELECT consumption FROM bill_info WHERE meterCode="+meter_code;
+            DataBaseConnection c1=new DataBaseConnection();
             c=c1.connect();
              ss=c.createStatement();
              r=ss.executeQuery(query10);
@@ -148,9 +166,9 @@ public class opertaor {
          }
       ///////////////////////////////////////////////////////////////////////// 
       //this function you enter the meter code and it print the bill
-        public customer print_bill()throws SQLException {
+        public Customer print_bill()throws SQLException {
              Scanner input=new Scanner(System.in);
-              sql c1=new sql();
+              DataBaseConnection c1=new DataBaseConnection();
               c=c1.connect();
              ss=c.createStatement();
         System.out.println("please enter your meter code");
@@ -158,24 +176,24 @@ public class opertaor {
         String fname,lname;
             int cost;
             //this query 11 get the first name,last name,cost
-            query11="SELECT * FROM customer_info WHERE metercode ="+code1;
+            query11="SELECT * FROM customer_info WHERE meterCode ="+code1;
             r=ss.executeQuery(query11);
        r.next();
        fname=r.getString("fname");
        lname=r.getString("lname");
        cost=tariff_print(code1);
-       return new customer(code1,fname,lname,cost);
+       return new Customer(code1,fname,lname,cost);
         }
         ////////////////////////////////////////////////////////////// 
         //you enter meter code and it delete the customer
-       public void cancelCustomerSubscripition() throws SQLException{
-           sql c1=new sql();
+       public void cancelCustomerSubscripition(int meterCode) throws SQLException{
+           DataBaseConnection c1=new DataBaseConnection();
             c=c1.connect();
-            System.out.println("please enter your meter code");
-           Scanner input=new Scanner(System.in);
+         //   System.out.println("please enter your meter code");
+         //  Scanner input=new Scanner(System.in);
          //query 14 delete customer from bill_info
         PreparedStatement k=c.prepareStatement(query14);
-        int meterCode = input.nextInt(); 
+       // int meterCode = input.nextInt(); 
          k.setInt(1,meterCode);
          k.execute();
          //query 15 delete the customer from customer_info
@@ -190,8 +208,8 @@ public class opertaor {
        }
        /////////////////////////////////////////////////////////////
        //view all bills of region
-       public ArrayList<customer> viewBillsOfRegion() throws SQLException{
-            sql c1=new sql();
+       public ArrayList viewBillsOfRegion() throws SQLException{
+            DataBaseConnection c1=new DataBaseConnection();
             c=c1.connect();
             ss=c.createStatement();
            Scanner input=new Scanner(System.in);
@@ -201,21 +219,19 @@ public class opertaor {
          r=ss.executeQuery(query17);
          int i=1;
          int code;
-        ArrayList<customer> list = new ArrayList<customer>();
+        ArrayList<Customer> list = new ArrayList<Customer>();
          while( r.next()){
              int cost;
              String f1name,lname;
               code=r.getInt("metercode");
-              f1name=r.getString("fname");
-              lname=r.getString("lname");
+              f1name=r.getString("firstname");
+              lname=r.getString("lastname");
               cost=tariff_print(code);
-              list.add(new customer(code,f1name,lname,cost));
-              
+              list.add(new Customer(code,f1name,lname,cost));
          }
          return list;
        }
-
-    public void setId(int id) {
+       public void setId(int id) {
         this.id = id;
     }
 
@@ -271,10 +287,8 @@ public class opertaor {
         return total_collected;
     }
        
-       opertaor(){
-           
-       }
-       opertaor(int id,String fname, String lname,String email,String pass,int totalcollected,String ssn){
+     
+       Opertaor(int id,String fname, String lname,String email,String pass,int totalcollected,String ssn){
            this.id = id;
            this.fname = fname;
            this.lname = lname;
@@ -284,7 +298,33 @@ public class opertaor {
            this.total_collected = total_collected;
            
        }
-
+public void updatetariff (int value,int meter)
+         {
+             DataBaseConnection d = new DataBaseConnection ();
+        Connection c ;
+        c=d.connect() ;
+       PreparedStatement ss;
+       String query; 
+       try {
+         
+           query = "UPDATE bill_info\n" +
+"SET triff = ?\n" +
+"where metercode =?";
+           ss=c.prepareStatement(query);
+           ss.setInt (1,value);
+           ss.setInt (2,meter);
+           ss.execute();
+           System.out.println("tariff has been updated");
+       }
+       catch (SQLException e)
+       {
+           System.out.println(e.getMessage());
+       }
+         }
+  public void copydata (Opertaor op)
+  {
+      this.id=op.getId();
+  }
 }
      
      

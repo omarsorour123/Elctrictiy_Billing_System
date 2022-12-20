@@ -1,4 +1,14 @@
+package com.mycompany.elctricitybillingsystem;
 
+
+import com.mycompany.elctricitybillingsystem.thesignin;
+import com.mycompany.elctricitybillingsystem.Admin;
+import com.mycompany.elctricitybillingsystem.Customer;
+import com.mycompany.elctricitybillingsystem.ValidateInput;
+import java.io.FileNotFoundException;
+import static java.lang.Integer.parseInt;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /*
@@ -11,13 +21,26 @@ import javax.swing.JOptionPane;
  * @author Admin
  */
 public class validate extends javax.swing.JFrame {
-
+ValidateInput input ;
+Customer customer;
+String path;
     /**
      * Creates new form validate
+     * @param v
      */
-    public validate() {
+    public validate(ValidateInput v,Customer customer2,String path) {
         initComponents();
          setLocationRelativeTo(null);
+          input = new ValidateInput();
+          customer = new Customer ();
+          input.setValidateCode(v.getValidateCode());
+          customer.copyData(customer2);
+          this.path=path;
+    }
+     public validate() {
+        initComponents();
+         setLocationRelativeTo(null);
+         
     }
 
     /**
@@ -98,7 +121,22 @@ public class validate extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-      //functon to validate code 
+      
+      String code = jTextField1.getText();
+      Admin admin = new Admin ();
+      if(input.checkCode(code))
+      {
+          admin.addNewCustomer(customer);
+          Contract con = new Contract ();
+          try {
+              con.addContract(path, customer.getMeterCode());
+          } catch (FileNotFoundException ex) {
+              Logger.getLogger(validate.class.getName()).log(Level.SEVERE, null, ex);
+          }
+          System.out.println("inserted bgd");
+      } 
+      
+        
        JOptionPane.showMessageDialog(null, "Account Created Successfully");
         this.setVisible(false);
 
